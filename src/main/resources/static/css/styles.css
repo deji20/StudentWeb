@@ -1,4 +1,150 @@
+
+#test{
+    margin-top: 25px;
+    font-size: 21px;
+    text-align: center;
+
+    -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: fadein 2s; /* Firefox < 16 */
+    -ms-animation: fadein 2s; /* Internet Explorer */
+    -o-animation: fadein 2s; /* Opera < 12.1 */
+    animation: fadein 2s;
+    animation-name: stretch;
+    animation-duration: 10s;
+    animation-timing-function: ease-out;
+    animation-delay: 0;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: none;
+    animation-play-state: running;
+    pointer-events: none;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+.element {
+    height: 250px;
+    width: 250px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    animation-name: stretch;
+    animation-duration: 10s;
+    animation-timing-function: ease-out;
+    animation-delay: 0;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: none;
+    animation-play-state: running;
+    pointer-events: none;
+}
+
+@keyframes stretch {
+    0% {
+        transform: scale(.01);
+        background-color: red;
+        border-radius: 100%;
+    }
+    50% {
+        background-color: orange;
+    }
+    100% {
+        transform: scale(7);
+        background-color: #ffffff;
+        opacity: 0.1;
+    }
+}
+
+
+.bounceInUp {
+    animation-name: bounceInUp;
+    animation-duration: 4s;
+
+}
+
+
+@keyframes bounceInUp {
+    from,
+    60%,
+    75%,
+    90%,
+    to {
+        animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+
+    from {
+        opacity: 0;
+        transform: translate3d(0, 3000px, 0);
+    }
+
+    60% {
+        opacity: 1;
+        transform: translate3d(0, -20px, 0);
+    }
+
+    75% {
+        transform: translate3d(0, 10px, 0);
+    }
+
+    90% {
+        transform: translate3d(0, -5px, 0);
+    }
+
+    to {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+
+.centerElement
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+
+@keyframes myfirst {
+    0%   { left:0px; top:0px;}
+    25%  { left:200px; top:0px;}
+    50%  { left:200px; top:200px;}
+    75%  { left:0px; top:200px;}
+    100% { left:0px; top:0px;}
+}
+
+#centerText {
+    text-align-last: center;
+    border: 2px solid black;
+}
+
 body {
+    overflow: hidden;
     font-family: arial, sans-serif;
     margin: 0;
     padding: 0;
