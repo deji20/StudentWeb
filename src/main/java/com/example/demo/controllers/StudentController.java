@@ -3,12 +3,9 @@ package com.example.demo.controllers;
 import com.example.demo.models.Student;
 import com.example.demo.repositories.IStudentRepository;
 import com.example.demo.repositories.InMemoryStudentRepositoryImpl;
-import com.example.demo.repositories.StudentRepositoryImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class StudentController {
@@ -20,19 +17,19 @@ public class StudentController {
     }
 
     @GetMapping("/")
-    public String index(Model model){
-        model.addAttribute("students" , studentRepository.readAll());
-        return "index";
+    public String index(Model model) {
+        model.addAttribute("students", studentRepository.readAll());
+        return "/index";
     }
 
-    @GetMapping("/create")
-    public String create(){
-        return "/create";
+    @GetMapping("/student/create")
+    public String create() {
+        return "/student/create";
     }
 
-    @GetMapping("/edit")
-    public String edit(){
-        return "/edit";
+    @GetMapping("/student/edit")
+    public String edit() {
+        return "/student/edit";
     }
 
     @GetMapping("/student")
@@ -41,4 +38,11 @@ public class StudentController {
         Student stu = studentRepository.read(id);
         return "The name is: " + stu.getFirstName() + " and the cpr is " + stu.getCpr();
     }
+
+    @PostMapping("/create/addStudent")
+    public String addStudent(@ModelAttribute Student stuFromPost){
+        studentRepository.create(stuFromPost);
+    return "redirect:/";
+    }
+
 }

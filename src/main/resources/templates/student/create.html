@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
 </head>
 <body>
 <nav>
@@ -14,22 +14,22 @@
 
 <div class="margin50left">
     <h1>Create Student</h1>
-    <form action="" method="GET">
+    <form action="/create/addStudent" method="POST">
 
-        <label for="" >First Name:
-            <input type="text" name="firstName">
+        <label for="firstName" >First Name:
+            <input id="firstName" type="text" name="firstName">
         </label><br>
 
-        <label for="">Last Name:
-            <input type="text" name="lastName">
+        <label for="lastName">Last Name:
+            <input id="lastName" type="text" name="lastName">
         </label><br>
 
-        <label for="">Enrollment date:
-            <input type="date" name="enrollmentDate">
+        <label for="enrollmentDate">Enrollment date:
+            <input id="enrollmentDate" type="date" name="enrollmentDate">
         </label><br>
 
-        <label for="">CPR:
-            <input type="text" name="cpr">
+        <label for="cpr">CPR:
+            <input  id="cpr" type="text" name="cpr">
         </label><br>
 
         <input type="submit" name="create" value="Create" class="btn btn-create">
