@@ -25,6 +25,16 @@ public class StudentController {
         return "index";
     }
 
+    @GetMapping("/create")
+    public String create(){
+        return "/create";
+    }
+
+    @GetMapping("/edit")
+    public String edit(){
+        return "/edit";
+    }
+
     @GetMapping("/student")
     @ResponseBody
     public String getStudentByParameter(@RequestParam int id) {
