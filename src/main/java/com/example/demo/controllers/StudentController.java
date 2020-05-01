@@ -33,6 +33,8 @@ public class StudentController {
     public String edit() {
         return "/student/edit";
 
+    }
+
     @GetMapping("/studentList")
     public String studentList(Model model){
         model.addAttribute("students" , studentRepository.readAll());
