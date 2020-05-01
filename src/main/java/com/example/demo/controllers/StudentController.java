@@ -3,11 +3,10 @@ package com.example.demo.controllers;
 import com.example.demo.models.Student;
 import com.example.demo.repositories.IStudentRepository;
 import com.example.demo.repositories.InMemoryStudentRepositoryImpl;
+import com.example.demo.repositories.StudentRepositoryImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class StudentController {
@@ -18,14 +17,27 @@ public class StudentController {
         studentRepository = new InMemoryStudentRepositoryImpl();
     }
 
+    @GetMapping("/student/create")
+    public String createStudent(Model model) {
+        model.addAttribute("students", studentRepository);
+        return "/student/create";
+    }
 
-    @GetMapping("/students")
+    @PostMapping("/create/addStudent")
+    public String addStudent(@ModelAttribute Student stuFromPost){
+        studentRepository.create(stuFromPost);
+        return "redirect:/";
+    }
+
+    @GetMapping("/student/edit")
+    public String edit() {
+        return "/student/edit";
+
+    @GetMapping("/studentList")
     public String studentList(Model model){
         model.addAttribute("students" , studentRepository.readAll());
         return "studentList";
     }
-
-
 
     @GetMapping("/student")
     @ResponseBody

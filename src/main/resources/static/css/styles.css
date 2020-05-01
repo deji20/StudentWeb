@@ -150,6 +150,10 @@ body {
     padding: 0;
 }
 
+.margin50left{
+    margin-left: 50px;
+}
+
 .container {
     width: 1024px;
     margin: 0 auto;
