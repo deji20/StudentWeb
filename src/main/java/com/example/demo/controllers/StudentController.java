@@ -23,8 +23,15 @@ public class StudentController {
     }
 
     @GetMapping("/student/create")
-    public String create() {
+    public String createStudent(Model model) {
+        model.addAttribute("students", studentRepository);
         return "/student/create";
+    }
+
+    @PostMapping("/create/addStudent")
+    public String addStudent(@ModelAttribute Student stuFromPost){
+        studentRepository.create(stuFromPost);
+        return "redirect:/";
     }
 
     @GetMapping("/student/edit")
@@ -37,12 +44,6 @@ public class StudentController {
     public String getStudentByParameter(@RequestParam int id) {
         Student stu = studentRepository.read(id);
         return "The name is: " + stu.getFirstName() + " and the cpr is " + stu.getCpr();
-    }
-
-    @PostMapping("/create/addStudent")
-    public String addStudent(@ModelAttribute Student stuFromPost){
-        studentRepository.create(stuFromPost);
-    return "redirect:/";
     }
 
 }
