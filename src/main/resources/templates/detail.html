@@ -35,8 +35,8 @@
             </table>
         </div>
         <div id="button_cont">
-            <button class="btn btn-ed">Edit</button>
-            <button class="btn btn-del">Delete!</button>
+            <a th:href="@{/edit(id=${student.id})}"><button class="btn btn-del">Edit</button></a>
+            <a th:href="@{/delete(id=${student.id})}"><button class="btn btn-ed">Delete</button></a>
         </div>
     </div>
 </body>
