@@ -1,10 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Student details</title>
+    <link rel="stylesheet" type="text/css" href="/css/detail.css"/>
 </head>
 <body>
-
+    <div id="header">
+        <table id="head_cont">
+            <tr>
+                <td><a href="/"><img src="img/keaWhite.png"></a></td>
+                <td><a class="links" href="/studentList">Students</a></td>
+                <td><a class="links" href="/">Courses</a></td>
+            </tr>
+        </table>
+    </div>
+    <div id="content">
+        <p id="title">Student Information</p>
+        <div id="cont">
+            <table id="cont_body">
+                <td class="column">
+                    <img th:src="${student.profilePic} ?: @{/img/default_pic.png}" id="billed"/>
+                </td>
+                <td class="column" id="info">
+                    <p class="info_label">Name:</p>
+                    <p th:text="${student.firstName} + ' ' +${student.lastName}"><p/>
+                    <p class="info_label">Enrollment Date:</p>
+                    <p th:text="${student.enrollmentDate}"></p>
+                    <p class="info_label">CPR-nr:</p>
+                    <p th:text="${student.cpr}"></p>
+                </td>
+            </table>
+        </div>
+        <div id="button_cont">
+            <button class="btn btn-ed">Edit</button>
+            <button class="btn btn-del">Delete!</button>
+        </div>
+    </div>
 </body>
 </html>

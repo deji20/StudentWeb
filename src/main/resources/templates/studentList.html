@@ -4,15 +4,24 @@
     <meta charset="UTF-8">
     <title>Student Administration</title>
     <!-- stylesheet -->
-    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="/css/studentList.css">
 </head>
 <body>
     <!-- TODO: MENU -->
+    <div id="header">
+        <table id="head_cont">
+            <tr>
+                <td><a href="/"><img src="img/keaWhite.png"></a></td>
+                <td><a class="links" href="/studentList">Students</a></td>
+                <td><a class="links" href="/">Courses</a></td>
+            </tr>
+        </table>
+    </div>
     <!-- TODO: Table of students -->
     <div class="container">
         <h1>Student administration</h1>
 
-        <table>
+        <table id="studentList">
             <tr>
                 <th>First name</th>
                 <th>Last name</th>
@@ -23,31 +32,14 @@
                 <td th:text="${student.firstName}"></td>
                 <td th:text="${student.lastName}"></td>
                 <td th:text="${student.enrollmentDate}"></td>
-                <td><a th:href="@{/student(id=${student.id})}"><button>Details</button></a></td>
+                <td>
+                    <a th:href="@{/student(id=${student.id})}"><button class="btn btn-details">Details</button></a>
+                    <a th:href="@{/student/edit(id=${student.id})}"><button class="btn btn-ed">Edit</button></a>
+                    <a th:href="@{/student/delete(id=${student.id})}"><button class="btn btn-del">Delete</button></a>
+                </td>
             </tr>
-
-            <!--
-            <tr>
-                <td>Jill</td>
-                <td>Smith</td>
-                <td>19/5-2020</td>
-                <td><button>click me</button></td>
-            </tr>
-            <tr>
-                <td>Eve</td>
-                <td>Jackson</td>
-                <td>11/6-2013</td>
-                <td><button>click me</button></td>
-
-            </tr>
-            <tr>
-                <td>Karl</td>
-                <td>Marx</td>
-                <td>11/6-2013</td>
-                <td><button>click me</button></td>
-            </tr>
-            -->
         </table>
+        <a href="/student/create"><Button class="btn btn-create">New Student</Button></a>
     </div>
 </body>
 </html>

@@ -10,6 +10,7 @@ public class Student{
     public String lastName;
     @DateTimeFormat(pattern = "yyyy-MM-dd") // needed for input field on html pages (in order to serve the right format)
     public Date enrollmentDate;
+    public String profilePic;
     public String cpr;
 
     public Student(int id, String firstName, String lastName, Date enrollmentDate, String cpr) {
@@ -60,6 +61,14 @@ public class Student{
 
     public void setCpr(String cpr) {
         this.cpr = cpr;
+    }
+
+    public void setProfilePic(String profilePic){
+        this.profilePic = profilePic;
+    }
+
+    public String getProfilePic(){
+        return profilePic;
     }
 
     @Override
