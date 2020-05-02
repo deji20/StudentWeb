@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+<body>
+<nav>
+    <a href="">KEA</a>
+    <a href="">hyperlink</a>
+    <a href="">hyperlink</a>
+</nav>
+
+<div class="margin50left">
+    <h1>Update student</h1>
+    <form action="/editStudent" method="POST">
+
+        <label for="firstName" >First Name:
+            <input id="firstName" type="text" name="firstName" th:value="${students.firstName}">
+        </label><br>
+
+        <label for="lastName">Last Name:
+            <input id="lastName" type="text" name="lastName" th:value="${students.lastName}">
+        </label><br>
+
+        <label for="enrollmentDate">Enrollment date:
+            <input id="enrollmentDate" type="date" name="enrollmentDate" th:value="${students.enrollmentDate}">
+        </label><br>
+
+        <label for="cpr">CPR:
+            <input id="cpr" type="text" name="cpr" th:value="${students.cpr}">
+        </label><br>
+
+        <input type="submit" name="edit" value="Edit" class="btn btn-ed">
+
+
+    </form>
+</div>
+
+</body>
+</html>

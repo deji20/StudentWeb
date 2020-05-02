@@ -3,7 +3,6 @@ package com.example.demo.controllers;
 import com.example.demo.models.Student;
 import com.example.demo.repositories.IStudentRepository;
 import com.example.demo.repositories.InMemoryStudentRepositoryImpl;
-import com.example.demo.repositories.StudentRepositoryImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,36 +16,43 @@ public class StudentController {
         studentRepository = new InMemoryStudentRepositoryImpl();
     }
 
-    @GetMapping("/student/create")
+    @GetMapping("/create")
     public String createStudent(Model model) {
         model.addAttribute("students", studentRepository);
-        return "/student/create";
+        return "/create";
     }
 
-    @PostMapping("/create/addStudent")
-    public String addStudent(@ModelAttribute Student stuFromPost){
-        studentRepository.create(stuFromPost);
-        return "redirect:/";
+    @PostMapping("/addStudent")
+    public String addStudent(@ModelAttribute Student studentFromPost){
+        studentRepository.create(studentFromPost);
+        return "redirect:/studentList";
     }
 
-    @GetMapping("/student/edit")
-    public String edit(@RequestParam int id, Model model) {
-        Student stu = studentRepository.read(id);
-        model.addAttribute("student", stu);
-        return "/student/edit";
-
+    @GetMapping("/edit")
+    public String edit(Model model, @RequestParam int id) {
+        model.addAttribute("students", studentRepository.read(id));
+        return "/edit";
     }
+
+    @PostMapping("/editStudent")
+    public String editStudent(@ModelAttribute Student studentFromPost){
+        studentRepository.update(studentFromPost);
+        return "redirect:/studentList";
+    }
+
 
     @GetMapping("/studentList")
     public String studentList(Model model){
         model.addAttribute("students" , studentRepository.readAll());
-        return "studentList";
+        return "/studentList";
     }
 
     @GetMapping("/student")
-    public String getStudentByParameter(@RequestParam int id, Model model) {
+    @ResponseBody
+    public String getStudentByParameter(@RequestParam int id) {
         Student stu = studentRepository.read(id);
-        model.addAttribute("student", stu);
-        return "student/detail";
+        return "The name is: " + stu.getFirstName() + " and the cpr is " + stu.getCpr();
     }
+
+
 }

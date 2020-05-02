@@ -44,11 +44,21 @@ public class InMemoryStudentRepositoryImpl implements IStudentRepository{
 
     @Override
     public boolean update(Student student) {
+        for(Student stu : inMemoryDatabase) {
+            if (stu.getId() == student.getId()) {
+
+            }
+        }
         return false;
     }
 
     @Override
     public boolean delete(int id) {
-        return false;
+        for(Student stu : inMemoryDatabase){
+            if(stu.getId() == id){
+                inMemoryDatabase.remove(stu.getId());
+            }
+        }
+        return true;
     }
 }
