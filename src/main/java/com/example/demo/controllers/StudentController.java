@@ -29,8 +29,8 @@ public class StudentController {
     }
 
     @GetMapping("/edit")
-    public String edit(Model model) {
-        //model.addAttribute("students", studentRepository);
+    public String edit(Model model, @RequestParam int id) {
+        model.addAttribute("students", studentRepository.read(id));
         return "/edit";
     }
 
@@ -39,6 +39,7 @@ public class StudentController {
         studentRepository.update(studentFromPost);
         return "redirect:/studentList";
     }
+
 
     @GetMapping("/studentList")
     public String studentList(Model model){
@@ -52,4 +53,6 @@ public class StudentController {
         Student stu = studentRepository.read(id);
         return "The name is: " + stu.getFirstName() + " and the cpr is " + stu.getCpr();
     }
+
+
 }
