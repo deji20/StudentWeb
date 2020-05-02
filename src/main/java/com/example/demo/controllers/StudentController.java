@@ -24,9 +24,9 @@ public class StudentController {
     }
 
     @PostMapping("/create/addStudent")
-    public String addStudent(@ModelAttribute Student stuFromPost){
-        studentRepository.create(stuFromPost);
-        return "redirect:/";
+    public String addStudent(@ModelAttribute Student studentFromPost){
+        studentRepository.create(studentFromPost);
+        return "redirect:/studentList";
     }
 
     @GetMapping("/student/edit")
