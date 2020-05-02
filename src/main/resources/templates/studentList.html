@@ -24,6 +24,9 @@
                 <td th:text="${student.lastName}"></td>
                 <td th:text="${student.enrollmentDate}"></td>
                 <td><a th:href="@{/student(id=${student.id})}"><button>Details</button></a></td>
+                <td><a th:href="@{/delete(id=${student.id})}"><button>Delete</button></a></td>
+                <td><a th:href="@{/edit(id=${student.id})}"><button>Edit</button></a></td>
+
             </tr>
 
             <!--

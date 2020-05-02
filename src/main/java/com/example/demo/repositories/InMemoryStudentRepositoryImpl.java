@@ -46,8 +46,7 @@ public class InMemoryStudentRepositoryImpl implements IStudentRepository{
     public boolean update(Student student) {
         for(Student stu : inMemoryDatabase) {
             if (stu.getId() == student.getId()) {
-                //parse all info to controller
-               Student studentToUpdate = student;
+                read(student.getId());
             }
         }
         return false;
