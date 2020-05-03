@@ -2,6 +2,7 @@ package com.example.demo.repositories;
 
 import com.example.demo.models.Student;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -13,9 +14,9 @@ public class InMemoryStudentRepositoryImpl implements IStudentRepository{
     public InMemoryStudentRepositoryImpl(){
         this.inMemoryDatabase = new ArrayList<Student>(
                 Arrays.asList(
-                        new Student(1, "Nicklas","Frederiksen", new Date(12312), "31134115-1231"),
-                        new Student(2, "Bent","Karlsen", new Date(2141241), "31134115-4112"),
-                        new Student(3, "Bob","Alicesen",new Date(12424141), "233124f14-5551")
+                        new Student(1, "Nicklas","Frederiksen", LocalDate.of(1970, 04, 20), "31134115-1231"),
+                        new Student(2, "Bent","Karlsen", LocalDate.of(1971, 02,10), "31134115-4112"),
+                        new Student(3, "Bob","Alicesen", LocalDate.of(1982,03,29), "233124f14-5551")
 
                 )
         );

@@ -3,6 +3,7 @@ package com.example.demo.controllers;
 import com.example.demo.models.Student;
 import com.example.demo.repositories.IStudentRepository;
 import com.example.demo.repositories.InMemoryStudentRepositoryImpl;
+import com.example.demo.repositories.StudentRepositoryImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +14,7 @@ public class StudentController {
     private IStudentRepository studentRepository;
 
     public StudentController() {
-        studentRepository = new InMemoryStudentRepositoryImpl();
+        studentRepository = new StudentRepositoryImpl();
     }
 
     @GetMapping("/create")
@@ -36,6 +37,7 @@ public class StudentController {
 
     @PostMapping("/editStudent")
     public String editStudent(@ModelAttribute Student studentFromPost){
+        System.out.println("in edit: " + studentFromPost);
         studentRepository.update(studentFromPost);
         return "redirect:/studentList";
     }
@@ -51,6 +53,12 @@ public class StudentController {
     public String getStudentByParameter(Model model, @RequestParam int id) {
         model.addAttribute("student", studentRepository.read(id));
         return "detail";
+    }
+
+    @GetMapping("/delete")
+    public String delete(@RequestParam int id){
+        studentRepository.delete(id);
+        return "redirect:/studentList";
     }
 
 

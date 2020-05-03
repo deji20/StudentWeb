@@ -2,6 +2,7 @@ package com.example.demo.models;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Student{
@@ -9,11 +10,11 @@ public class Student{
     public String firstName;
     public String lastName;
     @DateTimeFormat(pattern = "yyyy-MM-dd") // needed for input field on html pages (in order to serve the right format)
-    public Date enrollmentDate;
+    public LocalDate enrollmentDate;
     public String profilePic;
     public String cpr;
 
-    public Student(int id, String firstName, String lastName, Date enrollmentDate, String cpr) {
+    public Student(int id, String firstName, String lastName, LocalDate enrollmentDate, String cpr) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -47,11 +48,11 @@ public class Student{
         this.lastName = lastName;
     }
 
-    public Date getEnrollmentDate() {
+    public LocalDate getEnrollmentDate() {
         return enrollmentDate;
     }
 
-    public void setEnrollmentDate(Date enrollmentDate) {
+    public void setEnrollmentDate(LocalDate enrollmentDate) {
         this.enrollmentDate = enrollmentDate;
     }
 
@@ -78,6 +79,7 @@ public class Student{
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", enrollmentDate=" + enrollmentDate +
+                ", profilePic='" + profilePic + '\'' +
                 ", cpr='" + cpr + '\'' +
                 '}';
     }
