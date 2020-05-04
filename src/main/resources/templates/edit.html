@@ -18,7 +18,7 @@
 
 <div class="margin50left">
     <h1>Update student</h1>
-    <form action="/editStudent" method="POST">
+    <form action="/editStudent" enctype="multipart/form-data" method="POST">
 
         <label for="firstName" >First Name:
             <input id="firstName" type="text" name="firstName" th:value="${students.firstName}">
@@ -34,6 +34,10 @@
 
         <label for="cpr">CPR:
             <input id="cpr" type="text" name="cpr" th:value="${students.cpr}">
+        </label><br>
+
+        <label>Upload Picture
+            <input id="profilePic" name="picture" accept="image/jpeg" multiple="" type="file">
         </label><br>
 
         <input type="hidden" name="id" th:value="${students.id}"/>

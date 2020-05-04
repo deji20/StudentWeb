@@ -18,8 +18,7 @@
 
 <div class="margin50left">
     <h1>Create Student</h1>
-    <form action="/addStudent" method="POST">
-
+    <form action="/addStudent" enctype="multipart/form-data" method="POST">
         <label for="firstName" >First Name:
             <input id="firstName" type="text" name="firstName">
         </label><br>
@@ -36,6 +35,9 @@
             <input  id="cpr" type="text" name="cpr">
         </label><br>
 
+        <label>Upload Picture
+            <input id="profilePic" name="picture" accept="image/jpeg" multiple="" type="file">
+        </label><br>
         <input type="submit" name="create" value="Create" class="btn btn-create">
         <br><br>
         <button type="reset" value="Clear all" class="btn btn-del" style="width: 100px"> Reset</button>

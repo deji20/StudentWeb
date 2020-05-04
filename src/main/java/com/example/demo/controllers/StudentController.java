@@ -4,13 +4,21 @@ import com.example.demo.models.Student;
 import com.example.demo.repositories.IStudentRepository;
 import com.example.demo.repositories.InMemoryStudentRepositoryImpl;
 import com.example.demo.repositories.StudentRepositoryImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.ServletContext;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Paths;
 
 @Controller
 public class StudentController {
-
+    @Autowired
+    public ServletContext context;
     private IStudentRepository studentRepository;
 
     public StudentController() {
@@ -24,8 +32,20 @@ public class StudentController {
     }
 
     @PostMapping("/addStudent")
-    public String addStudent(@ModelAttribute Student studentFromPost){
-        studentRepository.create(studentFromPost);
+    public String addStudent(@ModelAttribute Student studentFromPost, @RequestParam MultipartFile picture){
+        Student student = studentRepository.read(studentRepository.create(studentFromPost));
+
+        if(!picture.isEmpty()) {
+            String path = context.getRealPath("/");
+            try {
+                student.setProfilePic(student.id + ".jpg");
+                File file = new File(path + student.profilePic);
+                picture.transferTo(file);
+                studentRepository.update(student);
+            } catch (IOException io) {
+                io.printStackTrace();
+            }
+        }
         return "redirect:/studentList";
     }
 
@@ -36,9 +56,18 @@ public class StudentController {
     }
 
     @PostMapping("/editStudent")
-    public String editStudent(@ModelAttribute Student studentFromPost){
-        System.out.println("in edit: " + studentFromPost);
-        studentRepository.update(studentFromPost);
+    public String editStudent(@ModelAttribute Student student, @RequestParam MultipartFile picture){
+        if(!picture.isEmpty()) {
+            String path = context.getRealPath("/");
+            try {
+                student.setProfilePic(student.id + ".jpg");
+                File file = new File(path + student.profilePic);
+                picture.transferTo(file);
+            } catch (IOException io) {
+                io.printStackTrace();
+            }
+        }else{student.profilePic = studentRepository.read(student.id).profilePic;}
+        studentRepository.update(student);
         return "redirect:/studentList";
     }
 
@@ -51,6 +80,7 @@ public class StudentController {
 
     @GetMapping("/student")
     public String getStudentByParameter(Model model, @RequestParam int id) {
+        System.out.println(studentRepository.read(id));
         model.addAttribute("student", studentRepository.read(id));
         return "detail";
     }

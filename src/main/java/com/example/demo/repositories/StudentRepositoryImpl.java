@@ -1,5 +1,4 @@
 package com.example.demo.repositories;
-
 import com.example.demo.models.Student;
 import com.example.demo.util.DatabaseConnectionManager;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,21 +23,23 @@ public class StudentRepositoryImpl implements IStudentRepository {
     }
 
     @Override
-    public boolean create(Student student){
+    public int create(Student student){
         try {
-            PreparedStatement prep = conn.prepareStatement("INSERT INTO Student VALUES (DEFAULT, ?, ?, ?, ?, ?)");
+            PreparedStatement prep = conn.prepareStatement("INSERT INTO Student VALUES (DEFAULT, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             prep.setString(1, student.firstName);
             prep.setString(2, student.lastName);
             prep.setDate(3, Date.valueOf(student.enrollmentDate));
             prep.setString(4, student.cpr);
             prep.setString(5, student.profilePic);
             prep.executeUpdate();
+
+            ResultSet rs = prep.getGeneratedKeys();
+            rs.next();
+            return rs.getInt(1);
         }catch(SQLException sql){
             sql.printStackTrace();
-        }finally {
-            try { conn.close(); } catch (SQLException sql) {sql.printStackTrace();}
-            return true;
         }
+        return 0;
     }
 
     @Override
@@ -55,14 +56,13 @@ public class StudentRepositoryImpl implements IStudentRepository {
                 studentToReturn.setLastName(rs.getString(3));
                 studentToReturn.setEnrollmentDate(rs.getDate(4).toLocalDate());
                 studentToReturn.setCpr(rs.getString(5));
+                studentToReturn.setProfilePic(rs.getString(6));
             }
         }
         catch(SQLException s){
             s.printStackTrace();
-        }finally {
-            try { conn.close(); } catch (SQLException sql) {sql.printStackTrace();}
-            return studentToReturn;
         }
+        return studentToReturn;
     }
 
     @Override
@@ -79,15 +79,14 @@ public class StudentRepositoryImpl implements IStudentRepository {
                     tempStudent.setLastName(rs.getString(3));
                     tempStudent.setEnrollmentDate(rs.getDate(4).toLocalDate());
                     tempStudent.setCpr(rs.getString(5));
+                    tempStudent.setProfilePic(rs.getString(6));
                     allStudents.add(tempStudent);
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
-            try { conn.close(); } catch (SQLException sql) {sql.printStackTrace();}
-            return allStudents;
         }
+        return allStudents;
     }
 
     @Override
@@ -106,15 +105,12 @@ public class StudentRepositoryImpl implements IStudentRepository {
             prep.setString(4, student.cpr);
             prep.setString(5, student.profilePic);
             prep.setInt(6, student.id);
-            System.out.println("in update: " + student);
             prep.executeUpdate();
             return true;
         }catch(SQLException sql){
             sql.printStackTrace();
-        }finally {
-            try { conn.close(); } catch (SQLException sql) {sql.printStackTrace();}
-            return true;
         }
+        return false;
     }
 
     @Override
@@ -125,9 +121,7 @@ public class StudentRepositoryImpl implements IStudentRepository {
             prep.executeUpdate();
         }catch(SQLException sql){
             sql.printStackTrace();
-        }finally {
-            try { conn.close(); } catch (SQLException sql) {sql.printStackTrace();}
-            return true;
         }
+        return false;
     }
 }
