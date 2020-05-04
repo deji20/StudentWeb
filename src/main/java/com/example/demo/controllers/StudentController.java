@@ -33,19 +33,8 @@ public class StudentController {
 
     @PostMapping("/addStudent")
     public String addStudent(@ModelAttribute Student studentFromPost, @RequestParam MultipartFile picture){
-        Student student = studentRepository.read(studentRepository.create(studentFromPost));
 
-        if(!picture.isEmpty()) {
-            String path = context.getRealPath("/");
-            try {
-                student.setProfilePic(student.id + ".jpg");
-                File file = new File(path + student.profilePic);
-                picture.transferTo(file);
-                studentRepository.update(student);
-            } catch (IOException io) {
-                io.printStackTrace();
-            }
-        }
+        if(!picture.isEmpty()) {studentRepository.create(addPicture(studentFromPost, picture));}
         return "redirect:/studentList";
     }
 
@@ -58,17 +47,10 @@ public class StudentController {
     @PostMapping("/editStudent")
     public String editStudent(@ModelAttribute Student student, @RequestParam MultipartFile picture){
         if(!picture.isEmpty()) {
-            String path = context.getRealPath("/");
-            try {
-                student.setProfilePic(student.id + ".jpg");
-                File file = new File(path + student.profilePic);
-                picture.transferTo(file);
-            } catch (IOException io) {
-                io.printStackTrace();
-            }
+            addPicture(student, picture);
         }else{student.profilePic = studentRepository.read(student.id).profilePic;}
         studentRepository.update(student);
-        return "redirect:/studentList";
+        return "redirect:/student?id="+student.id;
     }
 
 
@@ -80,7 +62,6 @@ public class StudentController {
 
     @GetMapping("/student")
     public String getStudentByParameter(Model model, @RequestParam int id) {
-        System.out.println(studentRepository.read(id));
         model.addAttribute("student", studentRepository.read(id));
         return "detail";
     }
@@ -91,5 +72,16 @@ public class StudentController {
         return "redirect:/studentList";
     }
 
+    private Student addPicture(Student student, MultipartFile picture){
+            String path = context.getRealPath("/");
+            try {
+                student.setProfilePic(student.id + ".jpg");
+                File file = new File(path + student.profilePic);
+                picture.transferTo(file);
+            } catch (IOException io) {
+                io.printStackTrace();
+            }
+            return student;
+    }
 
 }
