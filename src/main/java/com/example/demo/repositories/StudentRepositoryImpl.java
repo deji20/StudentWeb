@@ -33,11 +33,12 @@ public class StudentRepositoryImpl implements IStudentRepository {
             prep.setString(4, student.cpr);
             prep.setString(5, student.profilePic);
             prep.executeUpdate();
-            return true;
         }catch(SQLException sql){
             sql.printStackTrace();
+        }finally {
+            try { conn.close(); } catch (SQLException sql) {sql.printStackTrace();}
+            return true;
         }
-        return false;
     }
 
     @Override
@@ -58,8 +59,10 @@ public class StudentRepositoryImpl implements IStudentRepository {
         }
         catch(SQLException s){
             s.printStackTrace();
+        }finally {
+            try { conn.close(); } catch (SQLException sql) {sql.printStackTrace();}
+            return studentToReturn;
         }
-        return studentToReturn;
     }
 
     @Override
@@ -81,8 +84,10 @@ public class StudentRepositoryImpl implements IStudentRepository {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            try { conn.close(); } catch (SQLException sql) {sql.printStackTrace();}
+            return allStudents;
         }
-        return allStudents;
     }
 
     @Override
@@ -106,8 +111,10 @@ public class StudentRepositoryImpl implements IStudentRepository {
             return true;
         }catch(SQLException sql){
             sql.printStackTrace();
+        }finally {
+            try { conn.close(); } catch (SQLException sql) {sql.printStackTrace();}
+            return true;
         }
-        return false;
     }
 
     @Override
@@ -118,7 +125,9 @@ public class StudentRepositoryImpl implements IStudentRepository {
             prep.executeUpdate();
         }catch(SQLException sql){
             sql.printStackTrace();
+        }finally {
+            try { conn.close(); } catch (SQLException sql) {sql.printStackTrace();}
+            return true;
         }
-        return false;
     }
 }
