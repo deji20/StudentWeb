@@ -1,3 +1,85 @@
+body{
+
+    padding:0;
+    margin:8% 0%;
+    height:100%;
+    font-family: "Calibri";
+}
+
+#button_cont{
+    display:block;
+    width:25%;
+    margin: 2% 0;
+}
+.btn{
+    background-color: #4CAF50; /* Green */
+    color: white;
+    padding: 5% 10%;
+    margin-right:5%;
+
+    text-align: center;
+    text-decoration: none;
+    font-size: 12px;
+
+    border: none;
+    border-radius: 5px; /* https://www.w3schools.com/css/css3_borders.asp */
+    box-shadow: 1px 1px 1px #888888;
+    transition-duration: 0.1s;
+}
+.btn-ed {
+    background-color: #008CBA;
+}
+.btn-del {
+    background-color: #f44336;
+}
+.btn:hover {
+    box-shadow: 2px 2px 2px #888888;
+}
+/* Position the Popup form */
+.login-popup {
+    position: relative;
+    text-align: center;
+    width: 100%;
+}
+/* Hide the Popup form */
+.form-popup {
+    display: none;
+    position: relative;
+    left: 45%;
+    top:5%;
+    transform: translate(-45%,5%);
+    z-index: 9;
+}
+/* Styles for the form container */
+.form-container {
+    max-width: 300px;
+    padding: 20px;
+    background-color: #fff;
+}
+/* Full-width for input fields */
+
+
+/* Style submit/login button */
+.form-container{
+    position: inherit;
+    background-color: #9e00bf;
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom:10px;
+    opacity: 0.8;
+}
+/* Style cancel button */
+.form-container .cancel {
+    background-color: #cc0000;
+}
+/* Hover effects for buttons */
+.form-container {
+    opacity: 1;
+}
+
 #header{
     position:fixed;
     font-family: "Segoe UI";
@@ -9,101 +91,73 @@
     height:50px;
     overflow:hidden;
 }
-    #head_cont{
-        margin:0px;
-        height:100%;
-    }
-    #header img{
-        height:30px;
-        margin: 5px 10px;
-    }
-    #header .links{
-        height:100%;
-        margin:0px;
-        padding:20px 10px;
-        text-align: left;
-        text-decoration: none;
-        color:white;
-    }
-    .links:hover{
-        background-color:#6a6c96;
-    }
-
-body{
-    padding:0;
-    margin:8% 0%;
+#head_cont{
+    margin:0px;
     height:100%;
-    font-family: "Calibri";
+}
+#header img{
+    height:30px;
+    margin: 5px 10px;
+}
+#header .links{
+    height:100%;
+    margin:0px;
+    padding:20px 10px;
+    text-align: left;
+    text-decoration: none;
+    color:white;
+}
+.links:hover{
+    background-color:#6a6c96;
 }
 
 #content{
     width: 50%;
     margin:8% 8%;
 }
-    #title{
-        font-size: 200%;
-        font-family: "Segoe UI Semibold";
-    }
-    #cont{
-        border-radius: 10px;
-        border: 1px solid #727272;
-        border-width: 0 1px 1px 0px;
-        box-shadow: #DDDDDD 2px 2px 2px 2px;
 
-        width:100%;
-        height:40%;
+#title{
+    font-size: 200%;
+    font-family: "Segoe UI Semibold";
+}
 
-        overflow: auto;
-        background-color: #DDDDDD;
-    }
-        #cont_body{
-            margin:0;
-            height:100%;
-            width:100%;
-        }
-        .column{
-            width:50%;
-        }
-        #billed{
-            box-shadow: black 2px 2px 2px 2px;
-            display: block;
-            max-width:80%;
-            margin:2% 5%;
-        }
-        #info{
-            font-family: "Calibri Light";
-            font-size: 120%;
-        }
-            .info_label{
-                font-family: "Calibri";
-                font-size: 80%;
-            }
-    #button_cont{
-        display:block;
-        width:25%;
-        margin: 2% 0;
-    }
-        .btn{
-            background-color: #4CAF50; /* Green */
-            color: white;
-            padding: 5% 10%;
-            margin-right:5%;
+#cont{
+    border-radius: 10px;
+    border: 1px solid #727272;
+    border-width: 0 1px 1px 0px;
+    box-shadow: #DDDDDD 2px 2px 2px 2px;
 
-            text-align: center;
-            text-decoration: none;
-            font-size: 12px;
+    width:100%;
+    height:40%;
 
-            border: none;
-            border-radius: 5px; /* https://www.w3schools.com/css/css3_borders.asp */
-            box-shadow: 1px 1px 1px #888888;
-            transition-duration: 0.1s;
-        }
-        .btn-ed {
-            background-color: #008CBA;
-        }
-        .btn-del {
-            background-color: #f44336;
-        }
-        .btn:hover {
-            box-shadow: 2px 2px 2px #888888;
-        }
+    overflow: auto;
+    background-color: #DDDDDD;
+}
+
+#cont_body{
+    margin:0;
+    height:100%;
+    width:100%;
+}
+
+.column{
+    width:50%;
+}
+
+#billed{
+    box-shadow: black 2px 2px 2px 2px;
+    display: block;
+    max-width:80%;
+    margin:2% 5%;
+}
+
+#info{
+    font-family: "Calibri Light";
+    font-size: 120%;
+}
+
+.info_label{
+    font-family: "Calibri";
+    font-size: 80%;
+}
+
