@@ -23,7 +23,7 @@
         <table id="cont_body">
             <td class="column">
 <!--                <img th:src="${student.profilePic} ?: @{/img/default_pic.png}" id="billed"/>-->
-                <th:block th:if="${student.profilePic} eq NULL"><img id="billed" src="/img/team/1.jpg"></th:block>
+                <th:block th:if="${student.profilePic} eq NULL"><img id="billed" src="/img/default_pic.png"></th:block>
                 <th:block th:if="${student.profilePic} != NULL"> <img id="billed" th:src="${student.profilePic}"></th:block>
 
             </td>
@@ -44,33 +44,23 @@
     </div>
     <div class="login-popup">
         <div class="form-popup" id="popupForm">
-            <form class="form-container">
-                <h2 > OBS. Sletter student permanent fra systemet</h2>
-
+            <div class="form-container">
+                <h2>This Will Delete This Student Permanently</h2>
                 <a th:href="@{/delete(id=${student.id})}"><button class="btn btn-del">Delete</button></a>
-
                 <button type="button" class="btn btn-ed" onclick="closeForm()">Close</button>
-            </form>
+            </div>
         </div>
     </div>
     </div>
 
 
         <script>
-
-
-
             function openForm() {
                 document.getElementById("popupForm").style.display="block";
-
             }
-
             function closeForm() {
                 document.getElementById("popupForm").style.display="none";
             }
-
-            closeForm()
-
         </script>
 
 </body>

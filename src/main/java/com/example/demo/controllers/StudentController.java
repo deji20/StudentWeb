@@ -33,8 +33,8 @@ public class StudentController {
 
     @PostMapping("/addStudent")
     public String addStudent(@ModelAttribute Student studentFromPost, @RequestParam MultipartFile picture){
-
-        if(!picture.isEmpty()) {studentRepository.create(addPicture(studentFromPost, picture));}
+        if(!picture.isEmpty()){addPicture(studentFromPost, picture);}
+        studentRepository.create(studentFromPost);
         return "redirect:/studentList";
     }
 
@@ -46,9 +46,8 @@ public class StudentController {
 
     @PostMapping("/editStudent")
     public String editStudent(@ModelAttribute Student student, @RequestParam MultipartFile picture){
-        if(!picture.isEmpty()) {
-            addPicture(student, picture);
-        }else{student.profilePic = studentRepository.read(student.id).profilePic;}
+        if(!picture.isEmpty()) {addPicture(student, picture); }
+        else{student.profilePic = studentRepository.read(student.id).profilePic;}
         studentRepository.update(student);
         return "redirect:/student?id="+student.id;
     }
