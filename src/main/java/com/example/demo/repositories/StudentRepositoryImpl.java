@@ -25,6 +25,7 @@ public class StudentRepositoryImpl implements IStudentRepository {
     @Override
     public int create(Student student){
         try {
+            //create prepared CREATE statement
             PreparedStatement prep = conn.prepareStatement("INSERT INTO Student VALUES (DEFAULT, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             prep.setString(1, student.firstName);
             prep.setString(2, student.lastName);
@@ -33,6 +34,8 @@ public class StudentRepositoryImpl implements IStudentRepository {
             prep.setString(5, student.profilePic);
             prep.executeUpdate();
 
+            //generated keys are the values created in the sql database when creating a new student
+            //in this case we use it to get and return the id of the newly created student
             ResultSet rs = prep.getGeneratedKeys();
             rs.next();
             return rs.getInt(1);
@@ -46,9 +49,12 @@ public class StudentRepositoryImpl implements IStudentRepository {
     public Student read(int id) {
         Student studentToReturn = new Student();
         try {
+            //create prepared SELECT statement
             PreparedStatement getSingleStudent = conn.prepareStatement("SELECT * FROM student WHERE id=?");
             getSingleStudent.setInt(1,id);
             ResultSet rs = getSingleStudent.executeQuery();
+
+            //inputs values into a student which is then returned
             while(rs.next()){
                 studentToReturn = new Student();
                 studentToReturn.setId(rs.getInt(1));
@@ -69,9 +75,11 @@ public class StudentRepositoryImpl implements IStudentRepository {
     public List<Student> readAll() {
         List<Student> allStudents = new ArrayList<Student>();
         try {
+            //create prepared SELECT statement which returns all students
             PreparedStatement ps = conn.prepareStatement("SELECT * FROM student");
             ResultSet rs = ps.executeQuery();
             if(rs != null) {
+                //if there are any students insert them into the Student model and add them to arraylist
                 while (rs.next()) {
                     Student tempStudent = new Student();
                     tempStudent.setId(rs.getInt(1));
@@ -92,6 +100,7 @@ public class StudentRepositoryImpl implements IStudentRepository {
     @Override
     public boolean update(Student student) {
         try {
+            //create prepared UPDATE statement which updates every student attribute of the student with the given id
             PreparedStatement prep = conn.prepareStatement("UPDATE Student SET  " +
                     "firstName = ?, " +
                     "lastName = ?," +
@@ -116,9 +125,11 @@ public class StudentRepositoryImpl implements IStudentRepository {
     @Override
     public boolean delete(int id) {
         try {
+            //create prepared DELETE statement, which deletes the student with the given id
             PreparedStatement prep = conn.prepareStatement("DELETE FROM student WHERE id=?");
             prep.setInt(1, id);
             prep.executeUpdate();
+            return true;
         }catch(SQLException sql){
             sql.printStackTrace();
         }

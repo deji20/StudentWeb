@@ -71,16 +71,19 @@ public class StudentController {
         return "redirect:/studentList";
     }
 
+    //saves the given picture on the server and sets the students profilePic variable as the path to the picture
+    //should perhaps, be moved to studentRepositoryImpl to separate responsibilities
     private Student addPicture(Student student, MultipartFile picture){
-            String path = context.getRealPath("/");
-            try {
-                student.setProfilePic(student.id + ".jpg");
-                File file = new File(path + student.profilePic);
-                picture.transferTo(file);
-            } catch (IOException io) {
-                io.printStackTrace();
-            }
-            return student;
+        //gets the true path of the running server
+        String path = context.getRealPath("/");
+        try {
+            student.setProfilePic(path + student.id + ".jpg");
+            File file = new File(student.profilePic);
+            picture.transferTo(file);
+        } catch (IOException io) {
+            io.printStackTrace();
+        }
+        return student;
     }
 
 }

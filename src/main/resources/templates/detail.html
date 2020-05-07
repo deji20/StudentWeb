@@ -22,11 +22,12 @@
     <div id="cont">
         <table id="cont_body">
             <td class="column">
-                <!--<img th:src="@{student.profilePic} ?: @{/img/default_pic.png}" id="billed"/>-->
+                <!-- Checks if student has profile picture, otherwise display default-->
                 <th:block th:if="${student.profilePic} eq NULL"><img id="billed" src="/img/default_pic.png"></th:block>
                 <th:block th:if="${student.profilePic} != NULL"> <img id="billed" th:src="${student.profilePic}"></th:block>
             </td>
 
+            <!-- retrieves and displays student information using thymeleaf-->
             <td class="column" id="info">
                 <p class="info_label">Name:</p>
                 <p th:text="${student.firstName} + ' ' +${student.lastName}"></p> <br/>
@@ -38,6 +39,7 @@
         </table>
 
     </div>
+    <!--Buttons redirect to either delete or edit passing the student id as a url/Query string parameter-->
     <div id="button_cont">
         <a th:href="@{/edit(id=${student.id})}"><button class="btn btn-ed">Edit</button></a>
         <a onclick="openForm()"><button class="btn btn-del">Delete</button></a>
@@ -53,7 +55,7 @@
     </div>
     </div>
 
-
+        <!--Script which changes display of popUpForm class-->
         <script>
             function openForm() {
                 document.getElementById("popupForm").style.display="block";
