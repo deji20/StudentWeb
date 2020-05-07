@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Courses</title>
+    <link rel="stylesheet" type="text/css" href="/css/studentList.css">
+</head>
+<body>
+<!-- TODO: MENU -->
+<div id="header">
+    <table id="head_cont">
+        <tr>
+            <td><a href="/"><img src="img/keaWhite.png"></a></td>
+            <td><a class="links" href="/studentList">Students</a></td>
+            <td><a class="links" href="/courses">Courses</a></td>
+        </tr>
+    </table>
+</div>
+<!-- TODO: Table of students -->
+<div class="container">
+    <h1>Courses</h1>
+
+    <table id="studentList">
+        <tr>
+            <th>Name</th>
+            <th>Starts</th>
+            <th>ETCS</th>
+            <th>Edit</th>
+        </tr>
+        <tr th:each="course : ${courses}">
+            <td th:text="${course.name}"></td>
+            <td th:text="${course.startDate}"></td>
+            <td th:text="${course.etcs}"></td>
+            <td>
+                <a th:href="@{/courses/course(id=${course.id})}"><button class="btn btn-details">Details</button></a>
+                <a th:href="@{/courses/edit(id=${course.id})}"><button class="btn btn-ed">Edit</button></a>
+                <a th:href="@{/courses/delete(id=${course.id})}"><button class="btn btn-del">Delete</button></a>
+            </td>
+        </tr>
+    </table>
+    <a href="/courses/create"><Button class="btn btn-create">Add Course</Button></a>
+</div>
+</body>
+</html>

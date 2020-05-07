@@ -11,3 +11,11 @@ enrollmentDate date NOT NULL,
 cpr INT NOT NULL,
 picture VARCHAR(200) NULL
 );
+
+CREATE TABLE course(
+id INT auto_increment PRIMARY KEY,
+name VARCHAR(50) NOT NULL,
+startDate date NOT NULL,
+etcs INT NOT NULL,
+description VARCHAR(400) NOT NULL
+);

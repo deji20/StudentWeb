@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>create</title>
+    <title>Create</title>
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
+
 <body>
 <div id="header">
     <table id="head_cont">
@@ -17,31 +18,26 @@
 </div>
 
 <div class="margin50left">
-    <h1>Create Student</h1>
-    <form action="/addStudent" enctype="multipart/form-data" method="POST">
-        <label for="firstName" >First Name:
-            <input id="firstName" type="text" name="firstName">
+    <h1>Create Course</h1>
+    <form action="/courses/addCourse"method="POST">
+        <label for="Name" >Name:
+            <input id="Name" type="text" name="Name">
         </label><br>
 
-        <label for="lastName">Last Name:
-            <input id="lastName" type="text" name="lastName">
+        <label for="startDate">Start date:
+            <input id="startDate" type="date" name="startDate">
         </label><br>
 
-        <label for="enrollmentDate">Enrollment date:
-            <input id="enrollmentDate" type="date" name="enrollmentDate">
+        <label for="etcs">ETCS:
+            <input  id="etcs" type="number" name="etcs">
         </label><br>
 
-        <label for="cpr">CPR:
-            <input  id="cpr" type="text" name="cpr">
-        </label><br>
+        <label for="description">Description:</label><br>
+            <textarea id="description" name="description" rows="5" cols="30" draggable="false"></textarea><br>
 
-        <label>Upload Picture
-            <input id="profilePic" name="picture" accept="image/jpeg" multiple="" type="file">
-        </label><br>
         <input type="submit" name="create" value="Create" class="btn btn-create">
         <br><br>
         <button type="reset" value="Clear all" class="btn btn-del" style="width: 100px"> Reset</button>
-
     </form>
 </div>
 
