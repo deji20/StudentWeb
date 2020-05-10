@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface IStudentRepository {
     // CRUD operations
-    public int create(Student student);
+    public Student create(Student student);
 
     public Student read(int id);
 

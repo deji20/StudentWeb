@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Course</title>
+    <link rel="stylesheet" type="text/css" href="/css/course_detail.css">
+</head>
+<body>
+<div id="header">
+    <table id="head_cont">
+        <tr>
+            <td><a href="/"><img src="../img/keaWhite.png"></a></td>
+            <td><a class="links" href="/studentList">Students</a></td>
+            <td><a class="links" href="/courses">Courses</a></td>
+        </tr>
+    </table>
+</div>
+
+<div class="center">
+    <h1>Course Details</h1>
+    <table id="info">
+        <tr>
+            <td class="info_label">Name:</td>
+            <td id="Name" th:text="${course.name}"></td>
+        </tr>
+        <tr>
+            <td class="info_label">Start date:</td>
+            <td id="startDate" th:text="${course.startDate}"></td>
+        </tr>
+        <tr>
+            <td class="info_label">ETCS:</td>
+            <td id="etcs" th:text="${course.etcs}"></td>
+        </tr>
+        <tr>
+            <td class="info_label">Description:</td>
+            <td id="description" th:text="${course.description}"></td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>

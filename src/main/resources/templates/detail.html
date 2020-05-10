@@ -23,8 +23,9 @@
         <table id="cont_body">
             <td class="column">
                 <!-- Checks if student has profile picture, otherwise display default-->
-                <th:block th:if="${student.profilePic} eq NULL"><img id="billed" src="/img/default_pic.png"></th:block>
-                <th:block th:if="${student.profilePic} != NULL"> <img id="billed" th:src="${student.profilePic}"></th:block>
+                <!--<img id="billed" th:src="${student.profilePic} ?: '/img/default_pic.png'"/>-->
+                <img id="billed" th:src="${student.profilePic}" th:if="${student.profilePic != null}">
+                <img id="billed" src="/img/default_pic.png" th:if="${student.profilePic == null}" >
             </td>
 
             <!-- retrieves and displays student information using thymeleaf-->

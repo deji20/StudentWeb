@@ -31,6 +31,11 @@ public class CourseController {
         model.addAttribute("course", courseRepository.read(id));
         return "course_edit";
     }
+    @PostMapping("/update")
+    public String update(@ModelAttribute Course course){
+        courseRepository.update(course);
+        return "redirect:/courses";
+    }
 
     @GetMapping("/create")
     public String create(){
@@ -41,5 +46,11 @@ public class CourseController {
     public String delete(@RequestParam int id){
         courseRepository.delete(id);
         return "redirect:/courses";
+    }
+
+    @GetMapping("/course")
+    public String course(@RequestParam int id, Model model){
+        model.addAttribute(courseRepository.read(id));
+        return "course_detail";
     }
 }

@@ -33,8 +33,9 @@ public class StudentController {
 
     @PostMapping("/addStudent")
     public String addStudent(@ModelAttribute Student studentFromPost, @RequestParam MultipartFile picture){
-        if(!picture.isEmpty()){addPicture(studentFromPost, picture);}
-        studentRepository.create(studentFromPost);
+        Student student = studentRepository.create(studentFromPost);
+        //add picture if picture exists
+        if(!picture.isEmpty()){addPicture(student, picture);}
         return "redirect:/studentList";
     }
 
@@ -46,7 +47,7 @@ public class StudentController {
 
     @PostMapping("/editStudent")
     public String editStudent(@ModelAttribute Student student, @RequestParam MultipartFile picture){
-        if(!picture.isEmpty()) {addPicture(student, picture); }
+        if(!picture.isEmpty()) {addPicture(student, picture);}
         else{student.profilePic = studentRepository.read(student.id).profilePic;}
         studentRepository.update(student);
         return "redirect:/student?id="+student.id;
@@ -62,6 +63,7 @@ public class StudentController {
     @GetMapping("/student")
     public String getStudentByParameter(Model model, @RequestParam int id) {
         model.addAttribute("student", studentRepository.read(id));
+        System.out.println(studentRepository.read(id));
         return "detail";
     }
 
@@ -73,17 +75,17 @@ public class StudentController {
 
     //saves the given picture on the server and sets the students profilePic variable as the path to the picture
     //should perhaps, be moved to studentRepositoryImpl to separate responsibilities
-    private Student addPicture(Student student, MultipartFile picture){
+    //not an optimal solution as pictures wont be retained when restarting server
+    private void addPicture(Student student, MultipartFile picture) {
         //gets the true path of the running server
         String path = context.getRealPath("/");
         try {
-            student.setProfilePic(path + student.id + ".jpg");
-            File file = new File(student.profilePic);
+            student.profilePic = student.id + ".jpg";
+            studentRepository.update(student);
+            File file = new File(path + student.profilePic);
             picture.transferTo(file);
         } catch (IOException io) {
             io.printStackTrace();
         }
-        return student;
     }
-
 }

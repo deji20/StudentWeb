@@ -23,9 +23,9 @@ public class InMemoryStudentRepositoryImpl implements IStudentRepository{
     }
 
     @Override
-    public int create(Student student) {
+    public Student create(Student student) {
         this.inMemoryDatabase.add(student);
-        return student.id;
+        return student;
     }
 
     @Override

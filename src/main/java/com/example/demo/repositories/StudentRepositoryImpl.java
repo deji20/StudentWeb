@@ -23,7 +23,7 @@ public class StudentRepositoryImpl implements IStudentRepository {
     }
 
     @Override
-    public int create(Student student){
+    public Student create(Student student){
         try {
             //create prepared CREATE statement
             PreparedStatement prep = conn.prepareStatement("INSERT INTO Student VALUES (DEFAULT, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
@@ -38,11 +38,12 @@ public class StudentRepositoryImpl implements IStudentRepository {
             //in this case we use it to get and return the id of the newly created student
             ResultSet rs = prep.getGeneratedKeys();
             rs.next();
-            return rs.getInt(1);
+            student.id = rs.getInt(1);
+            return student;
         }catch(SQLException sql){
             sql.printStackTrace();
         }
-        return 0;
+        return null;
     }
 
     @Override

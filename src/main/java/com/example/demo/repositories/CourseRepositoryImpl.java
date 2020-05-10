@@ -100,8 +100,8 @@ public class CourseRepositoryImpl implements ICourseRepository{
                     "Name = ?, " +
                     "startDate = ?," +
                     "etcs = ?," +
-                    "description = ?," +
-                    "WHERE id=?");
+                    "description = ?" +
+                    " WHERE id=?");
             prep.setString(1, course.getName());
             prep.setDate(2, Date.valueOf(course.getStartDate()));
             prep.setInt(3, course.getEtcs());

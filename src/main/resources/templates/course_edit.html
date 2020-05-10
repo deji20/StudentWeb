@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Create</title>
@@ -18,24 +18,25 @@
 </div>
 
 <div class="margin50left">
-    <h1>Create Course</h1>
-    <form action="/courses/addCourse"method="POST">
+    <h1>Edit Course</h1>
+    <form action="/courses/update"method="post">
         <label for="Name" >Name:
-            <input id="Name" type="text" name="Name">
+            <input id="Name" type="text" name="Name" th:value="${course.name}">
         </label><br>
 
         <label for="startDate">Start date:
-            <input id="startDate" type="date" name="startDate">
+            <input id="startDate" type="date" name="startDate" th:value="${course.startDate}">
         </label><br>
 
         <label for="etcs">ETCS:
-            <input  id="etcs" type="number" name="etcs">
+            <input  id="etcs" type="number" name="etcs" th:value="${course.etcs}">
         </label><br>
 
         <label for="description">Description:</label><br>
-            <textarea id="description" name="description" rows="5" cols="30" draggable="false"></textarea><br>
+        <textarea id="description" name="description" rows="5" cols="95"  th:text="${course.description}"></textarea><br>
 
-        <input type="submit" name="create" value="Create" class="btn btn-create">
+        <input type="hidden" name="id" th:value="${course.id}"/>
+        <input type="submit" value="Edit" class="btn btn-ed">
         <br><br>
         <button type="reset" value="Clear all" class="btn btn-del" style="width: 100px"> Reset</button>
     </form>
